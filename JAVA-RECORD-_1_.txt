@@ -1,0 +1,965 @@
+1.Implement a java program to find Prime numbers within the given limit.
+
+PROGRAM CODE
+import java.io.*;
+import java.util.Scanner;
+class Prime
+{
+  public static void main(String args[])
+  {
+Scanner scn=new Scanner(System.in);
+    int num,count,i,j;
+System.out.println("Enter the limit:");
+
+int a = scn.nextInt();
+    for(num=1;num<=a;num++)
+    {
+      count=0;
+      for(i=2;i<=num/2;i++)
+      {
+         if(num%i==0)
+         {
+           count++;
+           break;
+         }
+      }
+      if(count==0 && num!=1)
+       System.out.println(" "+num);
+    }
+  }
+
+}
+
+OUTPUT
+
+
+
+2 Implement a java program to show the working of the Fibonacci series.
+
+PROGRAM CODE
+import java.io.*;
+import java.util.Scanner;
+
+public class Main
+
+{
+  public static void main(String args[])
+{
+    Scanner scn=new Scanner(System.in);
+    System.out.println("Enter the limit:");
+int a = scn.nextInt();
+int n1 = 0, n2 = 1, n3=0;
+System.out.println("The fibonacci series is");
+        for (int i = 2; n3<a; i++)
+{
+System.out.println(n3 + " ");
+            n1 = n2;
+            n2 = n3;
+       n3 = n2 + n1;
+}
+}
+};
+
+OUTPUT
+
+
+3 Implement a java program to show the Palindrome number or not.
+
+PROGRAM CODE
+import java.io.*;
+import java.util.Scanner;
+class palindrome1
+{
+public static void main(String args[])throws IOException
+{
+int rem=0,reverse=0,ori;
+Scanner scn = new Scanner(System.in);
+System.out.println("Enter an integer");
+int a = scn.nextInt();
+ori=a;
+while(a!=0)
+{
+rem=a%10;
+reverse=reverse*10+rem;
+a/=10;
+}
+if(ori==reverse)
+{
+System.out.println("The number is palindrome");
+}
+else
+System.out.println("The number is not palindrome");
+}
+}
+
+OUTPUT
+
+
+4 Java Program to Find Largest of Three Numbers 
+
+PROGRAM CODE
+import java.util.Scanner;  
+public class largestnumber
+{  
+public static void main(String[] args)  
+{  
+int n1, n2, n3;
+Scanner sc = new Scanner(System.in);  
+System.out.println("Enter the first number:");  
+n1 = sc.nextInt();  
+System.out.println("Enter the second number:");  
+n2 = sc.nextInt();  
+System.out.println("Enter the third number:");  
+n3 = sc.nextInt();
+if(n1 >= n2)
+{
+            if(n1 >= n3)
+                System.out.println(n1 + " is the largest number.");
+            else
+                System.out.println(n3 + " is the largest number.");
+        }
+else
+{
+            if(n2 >= n3)
+                System.out.println(n2 + " is the largest number.");
+            else
+                System.out.println(n3 + " is the largest number.");
+        }
+    }
+}
+OUTPUT
+
+5 Java Program to Display Even Numbers From 1 to 100 
+PROGRAM CODE
+ public class even
+{  
+public static void main(String args[])  
+{  
+System.out.print("Even numbers from 1 to 100: ");  
+for (int i=1; i<=100; i++)  
+{  
+if (i%2==0)  
+{  
+System.out.print(i + " ");  
+}  
+}  
+}  
+} 
+OUTPUT
+
+
+6 Write a Java Program to Check Leap Year 
+PROGRAM CODE
+import java.util.Scanner;
+public class leapyear {
+   public static void main(String[] args){
+      int year;
+      System.out.println("Enter an Year : ");
+      Scanner sc = new Scanner(System.in);
+      year = sc.nextInt();
+      if (((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0))
+         System.out.println("It is a leap year");
+      else
+         System.out.println("It is not a leap year");
+   }
+}
+OUTPUT
+
+
+7 Write a java program to implement all string operations 
+
+PROGRAM CODE
+import java.util.*;
+public class Main
+{
+    public static void main(String[] args)
+      {
+        String first="",second="";
+        Scanner sc=new Scanner(System.in);
+            System.out.println("String Operation");
+            System.out.println();
+            System.out.print("Enter the first Sting: ");
+             first=sc.nextLine();
+        System.out.print("Enter the second Sting: ");
+              second=sc.nextLine();
+            System.out.println("The strings are: "+first+" , "+second);
+         System.out.println("The length of the first string is :"+first.length());
+                System.out.println("The length of the second string is :"+second.length());
+            System.out.println("The concatenation of first and second string is :"+first.concat(" "+second));
+       
+            System.out.println("The uppercase of " +first+" is: "+first.toUpperCase());
+            System.out.println("The lowercase of " +first+" is: "+first.toLowerCase());
+            System.out.println("The uppercase of " +second+" is: "+second.toUpperCase());
+            System.out.println("The lowercase of " +second+" is: "+second.toLowerCase());
+            
+             System.out.println("The substring of "+first+" starting from index 1 and ending at 3 is: " + first.substring(1,3));
+             System.out.println("The substring of "+second+" starting from index 1 and ending at 3 is: " + second.substring(1,3));
+            boolean check=first.equals(second);
+            if(!check)
+                System.out.println(first + " and " + second + " are not same.");
+            else
+                System.out.println(first + " and " + second + " are same."); 
+    }
+}
+
+
+8 Write a program to implement Matrix Addition. 
+
+PROGRAM CODE
+import java.util.Scanner;
+public class Main
+{
+    public static void main(String[] args) 
+    {
+        int p, q, m, n;    
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the number of rows in the first matrix:");
+        p = sc.nextInt();    
+        System.out.print("Enter the number of columns in the first matrix:");
+        q = sc.nextInt();   
+        System.out.print("Enter the number of rows in the second matrix:");
+        m = sc.nextInt();   
+        System.out.print("Enter the number of columns in the second matrix:");
+        n = sc.nextInt();   
+        if (p == m && q == n) 
+        {
+            int a[][] = new int[p][q];    
+            int b[][] = new int[m][n];    
+            int c[][] = new int[m][n];    
+            System.out.println("Enter all the elements of first matrix:");
+            for (int i = 0; i < p; i++) 
+            {
+                for (int j = 0; j < q; j++) 
+                {
+                    a[i][j] = sc.nextInt();
+                }
+            }
+            System.out.println("");
+            System.out.println("Enter all the elements of second matrix:");
+            for (int i = 0; i < m; i++) 
+            {
+                for (int j = 0; j < n; j++) 
+                {
+                    b[i][j] = sc.nextInt();
+                }
+            }
+            System.out.println("");
+            System.out.println("First Matrix:");
+            for (int i = 0; i < p; i++) 
+            {
+                for (int j = 0; j < q; j++) 
+                {
+                    System.out.print(a[i][j]+" ");
+                }
+                System.out.println("");
+            }
+            System.out.println("Second Matrix:");
+            for (int i = 0; i < m; i++) 
+            {
+                for (int j = 0; j < n; j++) 
+                {
+                    System.out.print(b[i][j]+" ");
+                }
+                System.out.println("");
+            }
+            for (int i = 0; i < p; i++) 
+            {
+                for (int j = 0; j < n; j++) 
+                {
+                    for (int k = 0; k < q; k++) 
+                    {
+                        c[i][j] = a[i][j] + b[i][j];
+                    }
+                }
+            }
+            System.out.println("Matrix after addition:");
+            for (int i = 0; i < p; i++) 
+            {
+                for (int j = 0; j < n; j++) 
+                {
+                    System.out.print(c[i][j]+" ");
+                }
+                System.out.println("");
+            }
+        }
+        else
+        {
+            System.out.println("Addition not possible");
+            System.out.println("Try Again");
+        }
+    }
+}
+OUTPUT
+
+
+
+9 Write a Program to implement Matrix Multiplication 
+
+PROGRAM CODE
+import java.util.Scanner;
+class MUlMatrix
+{
+public static void main(String args[])
+{
+int r1, r2,c1,c2,i,j,k,sum;
+Scanner in = new Scanner(System.in);
+System.out.println("Enter the number of rows of matrix1");
+r1 = in.nextInt();
+System.out.println("Enter the number columns of matrix 1");
+c1 = in.nextInt();
+System.out.println("Enter the number of rows of matrix2");
+r2 = in.nextInt();
+System.out.println("Enter the number of columns of matrix 2");
+c2 = in.nextInt();
+if(c1==r2)
+{
+int mat1[][] = new int[r1][c1];
+int mat2[][] = new int[r2][c2];
+int res[][] = new int[r1][c2];
+ 
+System.out.println("Enter the elements of matrix1");
+ 
+for ( i= 0 ; i < r1 ; i++ )
+{
+ 
+for ( j= 0 ; j < c1 ;j++ )
+mat1[i][j] = in.nextInt();
+ 
+}
+System.out.println("Enter the elements of matrix2");
+ 
+for ( i= 0 ; i < r2 ; i++ )
+{
+ 
+for ( j= 0 ; j < c2 ;j++ )
+mat2[i][j] = in.nextInt();
+ 
+}
+ 
+System.out.println("\n\noutput matrix:-");
+for ( i= 0 ; i < r1 ; i++ )
+ 
+for ( j= 0 ; j <c2;j++)
+{
+sum=0;
+for ( k= 0 ; k <r2;k++ )
+{
+sum +=mat1[i][k]*mat2[k][j] ;
+ 
+}
+res[i][j]=sum;
+}
+for ( i= 0 ; i < r1; i++ )
+{
+for ( j=0 ; j < c2;j++ )
+System.out.print(res[i][j]+" ");
+ 
+System.out.println();
+}
+}
+else
+System.out.print("multipication does not exist ");
+}
+}
+
+
+
+
+
+OUTPUT
+
+
+
+10 Write a Java program that displays the area of differentFigures(Rectangle, triangle, Circle) using functionoverloading
+
+PROGRAM CODE
+
+import java.io.*;
+
+class shape
+{
+    void area(float x)
+    {
+        System.out.println("The area of the square is "+x*x);
+    }
+    void area(float x, float y)
+    {
+        System.out.println("The area of the rectangle is "+x*y);
+    }
+    void area(double x)
+    {
+        double z = 3.14 * x * x;
+        System.out.println("The area of the circle is "+z);
+    }
+}
+class overload
+{
+     public static void main(String args[])throws IOException
+{
+  shape ob = new shape();
+BufferedReader br = new BufferedReader(new
+InputStreamReader(System.in));
+System.out.println("Enter side of square:");
+float a = Float.parseFloat(br.readLine());
+  ob.area(a);
+System.out.println("Enter length of rectangle:");
+float l = Float.parseFloat(br.readLine());
+System.out.println("Enter breadth of rectangle:");
+float b = Float.parseFloat(br.readLine());
+  ob.area(l,b);
+System.out.println("Enter radius of circle:");
+double r = Double.parseDouble(br.readLine());
+  ob.area(r);
+        }
+}
+
+OUTPUT
+
+
+
+11 Write a Java program to illustrate the concept of Single inheritance
+
+PROGRAM CODE
+class Shape {
+   public void display() {
+      System.out.println("This is a shape");
+   }
+}
+class Rectangle extends Shape {
+   public void area() {
+      System.out.println("This is a rectangle");
+   }
+}
+class single_inheritance {
+   public static void main(String[] arguments) {
+      Rectangle rect = new Rectangle();
+      rect.display();
+      rect.area();
+   }
+}
+OUTPUT
+
+
+
+12 Write a Java program to illustrate the concept of Multi-level inheritance
+
+PROGRAM CODE
+class Shape {
+   public void display() {
+      System.out.println("This is a shape");
+   }
+}
+class Rectangle extends Shape {
+   public void area() {
+      System.out.println("This is a rectangle");
+   }
+}
+class Cube extends Rectangle {
+   public void volume() {
+      System.out.println("This is a cube");
+   }
+}
+ class Main {
+   public static void main(String[] arguments) {
+      Cube cube = new Cube();
+      cube.display();
+      cube.area();
+      cube.volume();
+   }
+}
+OUTPUT
+
+
+
+13 Java program to illustrate the concept of hierarchical inheritance
+
+PROGRAM CODE
+class A
+{
+    public void printA()
+    { System.out.println("Class A");
+    }
+}
+ 
+class B extends A
+{
+    public void printB()
+    {
+        System.out.println("Class B");
+    }
+}
+ 
+class C extends A
+{
+    public void printC()
+    {
+        System.out.println("Class C");
+    }
+}
+ 
+class D extends A
+{
+    public void printD()
+    {
+        System.out.println("Class D");
+       
+    }
+}
+public class Main
+{
+    public static void main(String[] args)
+    {
+        B b = new B();
+        b.printA();
+        b.printB();
+       
+        C c = new C();
+        c.printA();
+        c.printC();
+ 
+        D d= new D();
+        d.printA();
+        d.printD();
+    }
+}
+
+OUTPUT
+
+
+
+14 Write a Java program to illustrate Multiple inheritance using interface.
+
+PROGRAM CODE
+interface Printable
+{
+void print();
+}
+interface Showable
+{
+void show();
+}
+class demo implements Printable , Showable
+{
+public void print()
+{
+System.out.println("Hello");
+}
+public void show()
+{
+System.out.println("Welcome");
+}
+public static void main(String args[])
+{
+demo obj = new demo();
+obj.print();
+obj.show();
+}
+}
+OUTPUT
+
+
+
+15 Java program to implement the concept of function overriding 
+PROGRAM CODE
+class Bank
+{  
+int Interest()
+{
+return 0;
+}  
+}  
+class A extends Bank
+{  
+int Interest()
+{
+return 8;
+}  
+}  
+ 
+class B extends Bank
+{  
+int getRateOfInterest()
+{
+return 7;
+}  
+}  
+class C extends Bank
+{  
+int Interest()
+{
+return 9;
+}  
+}  
+class Overriding
+{  
+public static void main(String args[])
+{  
+A a=new A();  
+B b=new B();  
+C c=new C();  
+System.out.println("A's Rate of Interest: "+a.Interest());  
+System.out.println("B's Rate of Interest: "+b.Interest());  
+System.out.println("C's Rate of Interest: "+c.Interest());  
+}  
+}  
+OUTPUT
+
+16 Write a Java program to implement the concept of built-in Package
+
+PROGRAM CODE
+import java.math.*;
+import java.util.Scanner;
+ class package1
+ {
+   public static void main(String args [])
+   {
+      int a,b,maxi;
+      Scanner sc = new Scanner(System.in);
+      System.out.println("Enter 2 numbers:");
+      a = sc.nextInt();
+      b = sc.nextInt();
+      maxi = Math.max(a,b);
+      System.out.printf("Maximum is = "+maxi);
+    }
+ }
+OUTPUT
+
+
+17 Write a Java program to implement the concept of user- defined Package
+
+PROGRAM CODE
+package pack; 
+import java.util.Scanner;
+public class A
+{ 
+  public void msg()
+  {
+    Scanner obj= new Scanner(System.in);
+    System.out.print("enter the value of a:  ");
+    int a=obj.nextInt();
+    System.out.print("enter the value of b:  ");
+    int b=obj.nextInt();
+    System.out.print("enter the value of c : ");
+    int c=obj.nextInt();
+    int d=b*b-4*a*c;
+    if(d>0)
+    {
+        int r1 = (int) ((-b + Math.pow(d, 0.5)) / (2.0 * a)); 
+        int r2 = (int) ((-b - Math.pow(d, 0.5)) / (2.0 * a)); 
+        System.out.println("The roots are " + r1 + " and " + r2); 
+ 
+    }
+    else if (d == 0.0)  
+    { 
+     int r1 =(int) (-b / (2.0 * a)); 
+     System.out.println("The root is " + r1); 
+    }
+    else
+     { 
+      System.out.println("Roots are not real."); 
+     } 
+      
+   }
+}                         //Save as A.java
+ 
+ 
+package mypack;
+import pack.A;
+class B
+{ 
+  public static void main(String args[])
+  { 
+     A obj = new A();
+     obj.msg();
+  } 
+}                                                               //Save as B.java
+
+
+OUTPUT
+
+
+
+18 Write a java program that implements Array out of bound Exception using built-in-Exception
+
+PROGRAM CODE
+public class ArrayIndexOutOfBoundException {  
+    public static void main(String[] args) {  
+String[] arr = {"Java","C++","MYSQL","Python"};                                        
+        for(int i=0;i<=arr.length;i++) {      
+             System.out.println(arr[i]);     
+        }  
+    }  
+}  
+
+OUTPUT
+
+19 Write a Java program to illustrate the concept of thread using
+Thread Class
+
+PROGRAM CODE
+class A extends Thread
+{
+public void run()
+{
+for(int i=1; i<=5; i++)
+{
+System.out.println("\t From ThreadA : i = "+i);
+}
+System.out.println("Exit from A");
+}
+}
+class B extends Thread
+{
+public void run()
+{
+for(int j=1; j<=5; j++)
+{
+System.out.println("\t From ThreadB : j = "+j);
+}
+System.out.println("Exit from B");
+}
+}
+class ThreadTest1
+{
+public static void main(String args[])
+{
+A a = new A();
+B b = new B();
+a.start();
+b.start();
+}
+}
+
+OUTPUT
+
+
+
+20 Write a Program to illustrate the concept of thread using runnable Interface
+
+PROGRAM CODE
+class X implements Runnable
+{
+public void run()
+{
+for(int i=1; i<=5; i++)
+{
+System.out.println("\t ThreadX " +i);
+}
+System.out.println("End of ThreadX");
+}
+}
+class RunnableTest
+{
+public static void main(String args[])
+{
+X runnable = new X();
+Thread threadX = new Thread(runnable);
+threadX.start();
+System.out.println("End of main Thread");
+}
+}
+
+OUTPUT
+
+
+
+21 Write a java program to implement the concept of Thread Synchronization.
+
+PROGRAM CODE
+class Table
+{
+Synchronized void printTable(int n)
+{
+for(int i=1;i<=5;i++)
+{
+System.out.println(n*i)
+try
+{
+Thread.sleep(400);
+}
+catch(Exception e){System.out.println(e);}
+}
+}
+}
+class MyThread1 extends Thread
+{
+Table t;
+MyThread1(Table t)
+{
+this.t=t;
+}
+public void run()
+{
+t.printTable(5);
+}
+
+class MyThread2 extends Thread
+
+{
+Table t;
+MyThread2(Table t)
+{
+this.t=t;
+}
+public void run()
+{
+t.printTable(100);
+}
+}
+class Synch
+{
+public static void main(String args[])
+{
+Table obj = new Table();
+MyThread1 t1=new MyThread1(obj);
+MyThread2 t2=new MyThread2(obj);
+t1.start();
+t2.start();
+}
+}
+OUTPUT
+
+
+22 Write a java program to implement the concept of Thread Priority.
+PROGRAM CODE
+class A extends Thread
+{
+public void run()
+{
+System.out.println("threadA started");
+for(int i=1; i<=4; i++)
+{
+System.out.println("\tFrom Thread A : i = " +i);
+}
+System.out.println("Exit From A");
+}
+}
+class B extends Thread
+
+{
+public void run()
+{
+System.out.println("threadB started");
+for(int j=1; j<=4; j++)
+{
+System.out.println("\tFrom Thread B : j = " +j);
+}
+System.out.println("Exit From B");
+}
+}
+class ThreadPriority
+{
+public static void main(String args[])
+{
+A threadA = new A();
+B threadB = new B();
+threadB.setPriority(7);
+threadA.setPriority(3);
+threadA.start();
+threadB.start();
+System.out.println("End of main thread");
+}
+}
+
+OUTPUT
+
+
+
+23 Write a Java program to read data from a file and display it on the console
+PROGRAM CODE
+
+import java.util.Scanner;
+import java.io.*;
+
+public class file
+{
+    public static void main(String[] args)
+    {
+        String fname;
+        Scanner scan = new Scanner(System.in);
+       
+        // enter filename along with its extension
+        System.out.print("Enter the Name of File: ");
+        fname = scan.nextLine();
+       
+        String line = null;
+        try
+        {
+            FileReader fileReader = new FileReader(fname);
+           
+            // always wrap the FileReader in BufferedReader
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+           
+            while((line = bufferedReader.readLine()) != null)
+            {
+                System.out.println(line);
+            }
+           
+            // always close the file after its use
+            bufferedReader.close();
+        }
+        catch(IOException ex)
+        {
+            System.out.println("\nError occurred");
+            System.out.println("Exception Name: " +ex);
+        }
+    }
+}
+
+OUTPUT
+
+
+24 Java program to write user given data to a file
+PROGRAM CODE
+import java.io.PrintWriter; // Step 1
+import java.io.IOException;
+
+public class file2
+{
+    public static void main(String[] args) throws IOException
+    {
+        // Open the file.
+        PrintWriter out = new PrintWriter("file2.txt"); // Step 2
+
+        // Write the name of four oceans to the file
+        out.println("Atlantic");   // Step 3
+        out.println("Pacific");
+        out.println("Indian");
+        out.println("Arctic");
+
+        // Close the file.
+        out.close();  // Step 4
+System.out.println("Data has been written to the file");
+    }
+}
+OUTPUT
+
+25 Java program to copy the content of one file to another file. 
+PROGRAM CODE
+import java.io.*;
+import java.util.*;
+class Copyfile{
+public static void main(String args[]) throws IOException
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("PROVIDE SOURCE FILE NAME: ");
+String sfile=sc.next();
+System.out.println("PROVIDE DESTINATION FILE NAME:");
+String dfile=sc.next();
+FileReader fin=new FileReader(sfile);
+FileWriter fout=new FileWriter(dfile,true);
+int c;
+while((c=fin.read())!=-1)
+{
+fout.write(c);
+}
+System.out.println("Finish copying");
+fin.close();
+fout.close();
+}
+}
+
+OUTPUT
+
+
+
