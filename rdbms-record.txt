@@ -1,0 +1,755 @@
+INDEX
+
+Sl.No:Program Page number1DDL Commands-CREATE, ALTER, RENAME2DML Commands-INSERT,SELECT,UPDATE,DELETE3DDL Commands- TRUNCATE, DROP4Imposing Restrictions On Database -DCL Commands5Imposing Restrictions On Database -TCL Commands6Accessing database (SELECT, Filtering using WHERE, HAVING,
+GROUP BY, ORDER BY Clauses, Aggregate & Set operations Subquery and View)7Optimizing databases (Join)8PL/SQL program- Stored Procedures to find minimum number between two numbers9PL/SQL program- Stored Procedures to find square of a number.10PL/SQL program- Stored Procedures to swap 2 numbers.11PL/SQL program- Function to find maximum between 2 numbers.12PL/SQL program- Function to check whether the number is prime or not.13PL/SQL program-Trigger to handle update to the table.14PL/SQL program to implement explicit cursor.15PL/SQL program to implement implicit cursor.161718192021
+PROGRAM 1	DATE: 05-04-22
+
+AIM: DDL COMMANDS- CREATE, ALTER, RENAME
+
+
+
+
+
+
+The company database has three tables:
+
+1) The employees table stores the data of employees.
+
+2) The jobs table stores the job data including job title and salary range.
+
+3) The departments table stores department data.
+
+
+
+
+I . WRITE QUERIES IN MYSQL TO DO THE FOLLOWING : DDL COMMANDS
+1) Design and create database which consists of above three tables.
+2) Rename Departments table to Dept.
+3) Modify Column Salary from int to smallint
+
+4) Add Commission column to the Employees table.
+
+
+OUTPUT
+MariaDB [(none)]> create database db4;
+
+
+1. MariaDB [db4]> create table jobs(jobid int primary key,jobtitle varchar(20),minsalary int,maxsalary int);
+MariaDB [db4]> insert into jobs values(1,'manager',30000,80000); MariaDB [db4]> insert into jobs values(2,'pa',20000,40000); MariaDB [db4]> insert into jobs values(3,'coordinator',30000,50000); MariaDB [db4]> insert into jobs values(4,'clerk',15000,20000); MariaDB [db4]> insert into jobs values(5,'clerk',14000,30000); MariaDB [db4]> select * from jobs;
+
+| jobid | jobtitle	| minsalary | maxsalary |+	+	+	+	+|	1 | manager	|	30000 |	80000 ||	2 | pa	|	20000 |	40000 ||	3 | coordinator |	30000 |	50000 ||	4 | clerk	|	15000 |	20000 ||	5 | clerk	|	14000 |	30000 |+	+	+	+	+
+MariaDB [db4]> create table departments(department_id int primary key,department_name varchar(10));
+ MariaDB [db4]> insert into departments values(1,'importing'); MariaDB [db4]> insert into departments values(2,'exporting'); MariaDB [db4]> insert into departments values(3,'managing'); MariaDB [db4]> insert into departments values(4,'resource'); MariaDB [db4]> insert into departments values(5,'funding'); MariaDB [db4]> select * from dept;
+
+| department_id | department_name |+	+	+
+
+|	1 | importing	||	2 | exporting	||	3 | managing	||	4 | resource	||	5 | funding	|+	+	+
+
+MariaDB [db4]> create table employees(empid int,fstname varchar(30),lastname varchar(15),email varchar(30),phnnumber int,hire date,jobid int references jobs,salary int,managerid int,deptid int);
+ MariaDB [db4]> insert into employees values(1,'adithya','radhu','aradithya@gmail.com',9961487411,2022-06-20,1,50000,1,1);
+MariaDB [db4]> insert into employees values(2,'maria','r','maria@gmail.com',9961489761,2022- 06-10,1,30000,2,2);
+MariaDB [db4]> insert into employees values(3,'veena','k','veena@gmail.com',9961489971,2022-06-15,3,20000,3,3);
+MariaDB [db4]> insert into employees values(4,'raju','s','raju@gmail.com',9961487931,2022-05- 30,3,15000,4,4);
+MariaDB [db4]> insert into employees values(5,'priya','s','priya@gmail.com',9961487987,2022- 05-27,3,14000,5,5);
+MariaDB [db4]> select * from employees;
+
+
++	+	+	+	+	+	+   
+ 	+	+	+	+| empid | fstname | lastname | email	| phnnumber | hire	|
+jobid | salary | managerid | deptid |+	+	+	+	+	+	+   
+ 	+	+	+	+|	1 | adithya | radhu	| aradithya@gmail.com | 2147483647 | 2022-06-20 |
+1 | 50000 |	1 |	1 ||	2 | maria	| r	| maria@gmail.com	| 2147483647 | 2022-06-10 |
+1 | 30000 |	2 |	2 ||	3 | veena	| k	| veena@gmail.com	| 2147483647 | 2022-06-15 |
+3 | 20000 |	3 |	3 ||	4 | raju	| s	| raju@gmail.com	| 2147483647 | 2022-05-30 |
+3 | 15000 |	4 |	4 ||	5 | priya	| s	| priya@gmail.com	| 2147483647 | 2022-05-27 |
+3 | 14000 |	5 |	5 |+	+	+	+	+	+	+   
+ 	+	+	+	+
+2. MariaDB [db4]> rename table departments to dept;
+
+3. MariaDB [db4]> alter table employees modify salary smallint;
+
+4. MariaDB [db4]> alter table employees add commission int; MariaDB [db4]> update employees set commission=1000 where empid=1; MariaDB [db4]> update employees set commission=1000 where empid=2; MariaDB [db4]> update employees set commission=1000 where empid=3; MariaDB [db4]> update employees set commission=1000 where empid=4; MariaDB [db4]> update employees set commission=1000 where empid=5; MariaDB [db4]> select * from employees;
+
++	+	+	+	+	+	+	+-
+ 	+	+	+	+| empid | fstname | lastname | email	| phnnumber | hire	| jobid |
+salary | managerid | deptid | commission |+	+	+	+	+	+	+	+-
+ 	+	+	+	+|	1 | adithya | radhu	| aradithya@gmail.com | 2147483647 | 2022-06-20 |	1 |
+32767 |	1 |	1 |	NULL ||	2 | maria	| r	| maria@gmail.com	| 2147483647 | 2022-06-10 |	1 |
+30000 |	2 |	2 |	NULL ||	3 | veena	| k	| veena@gmail.com	| 2147483647 | 2022-06-15 |	3 |
+20000 |	3 |	3 |	NULL ||	4 | raju	| s	| raju@gmail.com	| 2147483647 | 2022-05-30 |	3 |
+15000 |	4 |	4 |	NULL ||	5 | priya	| s	| priya@gmail.com	| 2147483647 | 2022-05-27 |	3 |
+14000 |	5 |	5 |	NULL |+	+	+	+	+	+	+	+-
+ 	+	+	+	+
+PROGRAM 2	DATE: 05-04-22
+
+AIM: DML Commands-INSERT,SELECT,UPDATE,DELETE
+
+
+WRITE QUERIES IN MYSQL TO DO THE FOLLOWING : DML COMMANDS
+1) Insert 5 records into each tables.
+
+2) Select all rows from the tables.
+
+3) Select employees whose salary is greater than 30000.
+
+4) Insert records to newly added column Commission.
+
+5) Delete records from employees where employee_id equal to 4.
+
+OUTPUT
+
+1. MariaDB [db4]> create table jobs(jobid int primary key,jobtitle varchar(20),minsalary int,maxsalary int);
+MariaDB [db4]> insert into jobs values(1,'manager',30000,80000); MariaDB [db4]> insert into jobs values(2,'pa',20000,40000); MariaDB [db4]> insert into jobs values(3,'coordinator',30000,50000); MariaDB [db4]> insert into jobs values(4,'clerk',15000,20000);
+
+MariaDB [db4]> insert into jobs values(5,'clerk',14000,30000); MariaDB [db4]> select * from jobs;
+
+| jobid | jobtitle	| minsalary | maxsalary |+	+	+	+	+|	1 | manager	|	30000 |	80000 ||	2 | pa	|	20000 |	40000 ||	3 | coordinator |	30000 |	50000 ||	4 | clerk	|	15000 |	20000 ||	5 | clerk	|	14000 |	30000 |+	+	+	+	+
+MariaDB [db4]> create table departments(department_id int primary key,department_name varchar(10));
+ MariaDB [db4]> insert into departments values(1,'importing'); MariaDB [db4]> insert into departments values(2,'exporting'); MariaDB [db4]> insert into departments values(3,'managing'); MariaDB [db4]> insert into departments values(4,'resource'); MariaDB [db4]> insert into departments values(5,'funding'); MariaDB [db4]> select * from dept;
+
+| department_id | department_name |+	+	+|	1 | importing	||	2 | exporting	||	3 | managing	||	4 | resource	||	5 | funding	|+	+	+
+MariaDB [db4]> create table employees(empid int,fstname varchar(30),lastname varchar(15),email varchar(30),phnnumber int,hire date,jobid int references jobs,salary int,managerid int,deptid int);
+ MariaDB [db4]> insert into employees values(1,'adithya','radhu','aradithya@gmail.com',9961487411,2022-06-20,1,50000,1,1);
+MariaDB [db4]> insert into employees values(2,'maria','r','maria@gmail.com',9961489761,2022- 06-10,1,30000,2,2);
+
+MariaDB [db4]> insert into employees values(3,'veena','k','veena@gmail.com',9961489971,2022-06-15,3,20000,3,3);
+MariaDB [db4]> insert into employees values(4,'raju','s','raju@gmail.com',9961487931,2022-05- 30,3,15000,4,4);
+MariaDB [db4]> insert into employees values(5,'priya','s','priya@gmail.com',9961487987,2022- 05-27,3,14000,5,5);
+2. MariaDB [db4]> select * from jobs;
+
+
+| jobid | jobtitle	| minsalary | maxsalary |+	+	+	+	+|	1 | manager	|	30000 |	80000 ||	2 | pa	|	20000 |	40000 ||	3 | coordinator |	30000 |	50000 ||	4 | clerk	|	15000 |	20000 ||	5 | clerk	|	14000 |	30000 |+	+	+	+	+MariaDB [db4]> select * from employees;
+
+
++	+	+	+	+	+	+ 	
+ 	+	+	+	+| empid | fstname | lastname | email	| phnnumber | hire	|
+jobid | salary | managerid | deptid |+	+	+	+	+	+	+ 	
+ 	+	+	+	+|	1 | adithya | radhu	| aradithya@gmail.com | 2147483647 | 2022-06-20 |
+1 | 50000 |	1 |	1 ||	2 | maria	| r	| maria@gmail.com	| 2147483647 | 2022-06-10 |
+1 | 30000 |	2 |	2 ||	3 | veena	| k	| veena@gmail.com	| 2147483647 | 2022-06-15 |
+3 | 20000 |	3 |	3 ||	4 | raju	| s	| raju@gmail.com	| 2147483647 | 2022-05-30 |
+3 | 15000 |	4 |	4 ||	5 | priya	| s	| priya@gmail.com	| 2147483647 | 2022-05-27 |
+3 | 14000 |	5 |	5 |+	+	+	+	+	+	+ 	
+MariaDB [db4]> select * from dept;
+
+| department_id | department_name |
++	+	+
+|	1 | importing	|
+|	2 | exporting	|
+|	3 | managing	|
+|	4 | resource	|
+
+|	5 | funding	|+	+	+
+
+3. MariaDB [db4]> select * from employees where salary>30000;
+
+
++	+	+	+ 	 	+	+	+	+ 	
+ 	+	+	+| empid | fstname | lastname | email	| phnnumber | jobid | salary |
+managerid | deptid | commission |+	+	+	+	+	+	+	+ 	
+ 	+	+	+|	1 | adithya | radhu	| aradithya@gmail.com | 2147483647 |	1 | 32767 |
+1 |	1 |	1000 |+	+	+	+	+	+	+	+ 	
+ 	+	+	+4. MariaDB [db4]> update employees set commission=1000 where empid=1; MariaDB [db4]> update employees set commission=1000 where empid=2; MariaDB [db4]> update employees set commission=1000 where empid=3; MariaDB [db4]> update employees set commission=1000 where empid=4; MariaDB [db4]> update employees set commission=1000 where empid=5; MariaDB [db4]> select * from employees;
+
+| empid | fstname | lastname | email	| phnnumber | hire	|
+jobid | salary | managerid | deptid | commission |+	+	+	+	+	+	+   
+ 	+	+	+	+	+|	1 | adithya | radhu	| aradithya@gmail.com | 2147483647 | 2022-06-20 |
+1 | 32767 |	1 |	1 |	1000 ||	2 | maria	| r	| maria@gmail.com	| 2147483647 | 2022-06-10 |
+1 | 30000 |	2 |	2 |	1000 ||	3 | veena	| k	| veena@gmail.com	| 2147483647 | 2022-06-15 |
+3 | 20000 |	3 |	3 |	1000 ||	4 | raju	| s	| raju@gmail.com	| 2147483647 | 2022-05-30 |
+3 | 15000 |	4 |	4 |	1000 ||	5 | priya	| s	| priya@gmail.com	| 2147483647 | 2022-05-27 |
+3 | 14000 |	5 |	5 |	1000 |+	+	+	+	+	+	+   
+ 	+	+	+	+	+
+5. MariaDB [db4]> delete from employees where empid=4;
+
+PROGRAM 3	DATE: 05-04-22
+
+AIM: DDL Commands- TRUNCATE, DROP
+
+
+WRITE QUERIES IN MYSQL TO DO THE FOLLOWING : DDL COMMANDS
+1) Delete all the rows from table Dept.
+
+2) Drop the table jobs.
+
+
+OUTPUT
+
+1. MariaDB [db4]> truncate table employees;
+
+
+MariaDB [db4]> truncate table jobs;
+
+
+MariaDB [db4]> truncate table dept;
+
+
+2. MariaDB [db4]> drop table jobs;
+
+PROGRAM 4	DATE: 05-04-22
+
+AIM: Imposing Restrictions On Database -DCL Commands
+
+
+DCL COMMANDS:
+
+1. Create a new user.
+
+2. Grand all privilages to the newly created user.
+
+3. Revoke Insert privilege from the new user.
+
+
+OUTPUT
+
+MariaDB [(none)]> select user from mysql.user;
+
++	+
+
+| user |
+
++	+
+
+| root |
+
++	+
+
+1. MariaDB [(none)]> create user 'user1'@localhost identified by 'password1';
+
+2. MariaDB [(none)]> grant all privileges on *.* to 'user1'@localhost identified by 'password1'; MariaDB [(none)]> show grants for 'user1'@localhost;
++ 	
+ 	+
+
+| Grants for user1@localhost	|
+
++ 	
+ 	+
+
+| GRANT ALL PRIVILEGES ON *.* TO 'user1'@'localhost' IDENTIFIED BY PASSWORD '*668425423DB5193AF921380129F465A6425216D0' |
++ 	
+ 	+
+
+3. MariaDB [(none)]> revoke insert on *.* from 'user1'@'localhost'; MariaDB [(none)]> show grants for 'user1'@localhost;
++ 	
+
+
+ 	+
+
+| Grants for user1@localhost
+|
+
++ 	
+
+
+ 	+
+
+| GRANT SELECT, UPDATE, DELETE, CREATE, DROP, RELOAD, SHUTDOWN, PROCESS, FILE, REFERENCES, INDEX, ALTER, SHOW DATABASES, SUPER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, REPLICATION SLAVE, REPLICATION CLIENT, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER, CREATE TABLESPACE ON *.* TO
+'user1'@'localhost' IDENTIFIED BY PASSWORD '*668425423DB5193AF921380129F465A6425216D0' |
++ 	
+
+
+ 	+ MariaDB [(none)]> create database db5;
+ MariaDB [(none)]> use db5; Database changed
+MariaDB [db5]> create table student(stid int,name varchar (30)); MariaDB [db5]> insert into student values(1,'adithya');
+ERROR 1142 (42000): INSERT command denied to user 'user1'@'localhost' for table 'student'
+
+PROGRAM 5	DATE: 06-04-22
+
+AIM: Imposing Restrictions On Database -TCL Commands Create a table called customer with following fields CI,Cname,Salary Perform the following TCL commands
+1. Save the transaction into the database(commit)
+2. Restore the database to last committed state (Roll back)
+3. Rollback the transaction to particular point (Save point)
+
+
+OUTPUT
+
+MariaDB [(none)]> create database data1;MariaDB [(none)]> use data1;Database changedMariaDB [data1]> create table customer(ci int,cname varchar(20),salary int);MariaDB [data1]> start transaction;MariaDB [data1]> insert into customer values(1,'pinky',10000);MariaDB [data1]> insert into customer values(2,'micky',11000);MariaDB [data1]> insert into customer values(3,'vicky',12000);MariaDB [data1]> commit;MariaDB [data1]> set autocommit=0;MariaDB [data1]> select * from customer;+	+	+	+| ci	| cname | salary |+	+	+	+|	1 | pinky | 10000 ||	2 | micky | 11000 ||	3 | vicky | 12000 |+	+	+	+MariaDB [data1]> delete from customer where ci=3;MariaDB [data1]> rollback;MariaDB [data1]> select * from customer;+	+	+	+| ci	| cname | salary |+	+	+	+|	1 | pinky | 10000 ||	2 | micky | 11000 ||	3 | vicky | 12000 |+	+	+	+3 rows in set (0.00 sec)
+MariaDB [data1]> start transaction;MariaDB [data1]> savepoint sp3;MariaDB [data1]> insert into customer values(4,'nicky',12000);MariaDB [data1]> select * from customer;+	+	+	+| ci	| cname | salary |+	+	+	+|	1 | pinky | 10000 ||	2 | micky | 11000 ||	3 | vicky | 12000 ||	4 | nicky | 12000 |+	+	+	+MariaDB [data1]> delete from customer where ci=4;MariaDB [data1]> savepoint sp4;MariaDB [data1]> insert into customer values(6,'kicky',9000);MariaDB [data1]> select * from customer;+	+	+	+| ci	| cname | salary |+	+	+	+|	1 | pinky | 10000 ||	2 | micky | 11000 ||	3 | vicky | 12000 ||	6 | kicky |	9000 |+	+	+	+
+MariaDB [data1]> rollback to sp3;MariaDB [data1]> select * from customer;+	+	+	+| ci	| cname | salary |+	+	+	+|	1 | pinky | 10000 ||	2 | micky | 11000 ||	3 | vicky | 12000 |+	+	+	+
+
+PROGRAM 6	DATE: 12-04-22
+
+AIM: Accessing database (SELECT, Filtering using WHERE, HAVING,
+
+GROUP BY, ORDER BY Clauses, Aggregate & Set operations Subquery and View)
+
+Consider a database LOANS with the following tuples:
+
+
+1. Create the table Loans and insert tuples in it.
+2. Display the details of all the loans.
+3. Display the AccNo, Cust_Name, and Loan_Amount of all the loans.
+4. Display the details of all the loans with less than 40 instalments.
+5. Display the AccNo and Loan_Amount of all the loans started before 01-04-2009.
+6. Display the Int_Rate of all the loans started after 01-04-2009.
+7. Display the details of all the loans whose rate of interest is NULL.
+8. Display the details of all the loans whose rate of interest is not NULL.
+9. Display the amounts of various loans from the table LOANS. A loan amount should appear only once.
+10. Display the number of installments of various loans from the table LOANS. An instalment should appear only once.
+11. Display the details of all the loans started after 31-12-2008 for which the number of instalments are more than 36.
+12. Display the Cust_Name and Loan_Amount for all the loans which do not have number of instalments 36.
+13. Display the Cust_Name and Loan_Amount for all the loans for which the loan amount is less than 500000 or	int_rate is more than 12.
+14. Display the details of all the loans whose Loan_Amount is in the range 400000 to 500000.
+
+15. Display the details of all the loans whose rate of interest is in the range 11% to 12%.
+16. Display the Cust_Name and Loan_Amount for all the loans for which the number of installments are 24, 36, or 48. (Using IN operator)
+17. Display the AccNo, Cust_Name, and Loan_Amount for all the loans for which the Cust_Name ends with 'Sharma'.
+18. Display the AccNo, Cust_Name, and Loan_Amount for all the loans for which the Cust_Name ends with 'a'.
+19. Display the AccNo, Cust_Name, and Loan_Amount for all the loans for which the Cust_Name contains 'a'.
+20. Display the AccNo, Cust_Name, and Loan_Amount for all the loans for which the Cust_Name does not contain 'P'.
+21. Display the AccNo, Cust_Name, and Loan_Amount for all the loans for which the Cust_Name contains 'a' as the second last character.
+22. Display the details of all the loans in the ascending order of their Loan_Amount.
+23. Display the details of all the loans in the descending order of their Start_Date.
+24. Put the interest rate 11.50% for all the loans for which interest rate is NULL.
+25. Increase the interest rate by 0.5% for all the loans for which the loan amount is more than 400000.
+26. For each loan replace Interest with (Loan_Amount*Int_Rate*Instalments) 12*100.
+27. Delete the records of all the loans of 'K.P. Jain'
+28. Add another column Category of type CHAR(1) in the Loan table.
+29. Display the sum of all Loan Amount for whose Interest rate is greater than 10.
+30. Display the Maximum Interest from Loans table.
+31. Display the count of all loan holders whose name is ending with 'Sharma'.
+32. Display the count of all loan holders whose Interest is Null.
+33	.Display the Interest wise details of Loan Account Holders.
+34. Display the Interest wise details of Loan Account Holders with at least 10 installments remaining.
+35. Display the Interest wise count of all loan holders whose Installment due is more than 5 in each group.
+OUTPUT
+
+MariaDB [(none)]> use loans;Database changed
+MariaDB [loans]> create table loans(accn int primary key,custname varchar(30),loanamount int,instalments int,rate int,startdate date,interest int);MariaDB [loans]> insert into loans values(1,'R K Gupta',300000,36,12,'2009-07-
+19',1200);MariaDB [loans]> insert into loans values(2,'S P Sharma',500000,48,10,'2008-03-
+22',1800);MariaDB [loans]> insert into loans values(3,'K P Jain',300000,36,NULL,'2007-03-
+08',1600);MariaDB [loans]> insert into loans values(4,'M P Yadhav',800000,60,10,'2008-12-
+06',2250);MariaDB [loans]> insert into loans values(5,'S P Sinha',200000,36,12.50,'2010-01-
+03',4500);MariaDB [loans]> insert into loans values(6,'P Sharma',700000,60,12.50,'2008-06-
+05',3500);MariaDB [loans]> insert into loans values(7,'K S Dhall',500000,48,NULL,'2008-03-
+05',3800);MariaDB [loans]> select * from loans;+	+	+	+	+	+	+	+| accn | custname	| loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+|	1 | R K Gupta  |	300000 |	36 |	12 | 2009-07-19 |	1200 ||	2 | S P Sharma |	500000 |	48 |	10 | 2008-03-22 |	1800 ||	3 | K P Jain	|	300000 |	36 | NULL | 2007-03-08 |	1600 ||	4 | M P Yadhav |	800000 |	60 |	10 | 2008-12-06 |	2250 ||	5 | S P Sinha  |	200000 |	36 |	13 | 2010-01-03 |	4500 ||	6 | P Sharma	|	700000 |	60 |	13 | 2008-06-05 |	3500 ||	7 | K S Dhall  |	500000 |	48 | NULL | 2008-03-05 |	3800 |+	+	+	+	+	+	+	+MariaDB [loans]> alter table loans modify rate decimal(10,2);MariaDB [loans]> select * from loans;+	+	+	+	+	+	+	+| accn | custname	| loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+|	1 | R K Gupta  |	300000 |	36 | 12.00 | 2009-07-19 |	1200 ||	2 | S P Sharma |	500000 |	48 | 10.00 | 2008-03-22 |	1800 ||	3 | K P Jain	|	300000 |	36 | NULL | 2007-03-08 |	1600 ||	4 | M P Yadhav |	800000 |	60 | 10.00 | 2008-12-06 |	2250 ||	5 | S P Sinha  |	200000 |	36 | 13.00 | 2010-01-03 |	4500 ||	6 | P Sharma	|	700000 |	60 | 13.00 | 2008-06-05 |	3500 ||	7 | K S Dhall  |	500000 |	48 | NULL | 2008-03-05 |	3800 |+	+	+	+	+	+	+	+MariaDB [loans]> select accn,loanamount,custname from loans;+	+	+	+| accn | loanamount | custname	|
+
+
++	+	+	+|	1 |	300000 | R K Gupta ||	2 |	500000 | S P Sharma ||	3 |	300000 | K P Jain	||	4 |	800000 | M P Yadhav ||	5 |	200000 | S P Sinha ||	6 |	700000 | P Sharma	||	7 |	500000 | K S Dhall |+	+	+	+MariaDB [loans]> select * from loans where instalments<40;+	+	+	+	+	+	+	+| accn | custname | loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+|	1 | R K Gupta |	300000 |	36 | 12.00 | 2009-07-19 |	1200 ||	3 | K P Jain  |	300000 |	36 | NULL | 2007-03-08 |	1600 ||	5 | S P Sinha |	200000 |	36 | 13.00 | 2010-01-03 |	4500 |+	+	+	+	+	+	+	+MariaDB [loans]> select accn,loanamount from loans where startdate<'2009-04-01';+	+	+| accn | loanamount |+	+	+|	2 |	500000 ||	3 |	300000 ||	4 |	800000 ||	6 |	700000 ||	7 |	500000 |+	+	+MariaDB [loans]> select rate from loans where startdate>'2009-04-01';+	+| rate |+	+| 12.00 || 13.00 |+	+MariaDB [loans]> select * from loans where rate is null;+	+	+	+	+	+	+	+| accn | custname | loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+|	3 | K P Jain  |	300000 |	36 | NULL | 2007-03-08 |	1600 ||	7 | K S Dhall |	500000 |	48 | NULL | 2008-03-05 |	3800 |+	+	+	+	+	+	+	+MariaDB [loans]> select * from loans where rate is not null;+	+	+	+	+	+	+	+| accn | custname	| loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+
+
+
+|	1 | R K Gupta  |	300000 |	36 | 12.00 | 2009-07-19 |	1200 ||	2 | S P Sharma |	500000 |	48 | 10.00 | 2008-03-22 |	1800 ||	4 | M P Yadhav |	800000 |	60 | 10.00 | 2008-12-06 |	2250 ||	5 | S P Sinha  |	200000 |	36 | 13.00 | 2010-01-03 |	4500 ||	6 | P Sharma	|	700000 |	60 | 13.00 | 2008-06-05 |	3500 |+	+	+	+	+	+	+	+MariaDB [loans]> select distinct loanamount from loans;+	+| loanamount |+	+|	300000 ||	500000 ||	800000 ||	200000 ||	700000 |+	+MariaDB [loans]> select distinct instalments from loans;+	+| instalments |+	+|	36 ||	48 ||	60 |+	+MariaDB [loans]> select * from loans where startdate>'2008-12-31' and instalments>36;Empty set (0.01 sec)MariaDB [loans]> select custname,loanamount from loans where not instalments=36;+	+	+| custname	| loanamount |+	+	+| S P Sharma |	500000 || M P Yadhav |	800000 || P Sharma	|	700000 || K S Dhall |	500000 |+	+	+4 rows in set (0.00 sec)MariaDB [loans]> select custname,loanamount from loans where loanamount<500000 or rate>12;+	+	+| custname | loanamount |+	+	+| R K Gupta |	300000 || K P Jain |	300000 || S P Sinha |	200000 || P Sharma |	700000 |
+
+
++	+	+4 rows in set (0.00 sec)MariaDB [loans]> select * from loans where loanamount between 400000 and 500000;+	+	+	+	+	+	+	+| accn | custname	| loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+|	2 | S P Sharma |	500000 |	48 | 10.00 | 2008-03-22 |	1800 ||	7 | K S Dhall  |	500000 |	48 | NULL | 2008-03-05 |	3800 |+	+	+	+	+	+	+	+2 rows in set (0.00 sec)MariaDB [loans]> select * from loans where rate between 11 and 12;+	+	+	+	+	+	+	+| accn | custname | loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+|	1 | R K Gupta |	300000 |	36 | 12.00 | 2009-07-19 |	1200 |+	+	+	+	+	+	+	+MariaDB [loans]> select custname,loanamount from loans where instalments in(24,36,48);+	+	+| custname	| loanamount |+	+	+| R K Gupta |	300000 || S P Sharma |	500000 || K P Jain	|	300000 || S P Sinha |	200000 || K S Dhall |	500000 |+	+	+5 rows in set (0.01 sec)MariaDB [loans]> select accn,custname,loanamount from loans where custname like '%Sharma';+	+	+	+| accn | custname	| loanamount |+	+	+	+|	2 | S P Sharma |	500000 ||	6 | P Sharma	|	700000 |+	+	+	+2 rows in set (0.00 sec)MariaDB [loans]> select accn,custname,loanamount from loans where custname like '%a';+	+	+	+| accn | custname	| loanamount |+	+	+	+|	1 | R K Gupta  |	300000 ||	2 | S P Sharma |	500000 ||	5 | S P Sinha  |	200000 |
+
+
+|	6 | P Sharma	|	700000 |+	+	+	+4 rows in set (0.00 sec)MariaDB [loans]> select accn,custname,loanamount from loans where custname like '%a%';+	+	+	+| accn | custname	| loanamount |+	+	+	+|	1 | R K Gupta  |	300000 ||	2 | S P Sharma |	500000 ||	3 | K P Jain	|	300000 ||	4 | M P Yadhav |	800000 ||	5 | S P Sinha  |	200000 ||	6 | P Sharma	|	700000 ||	7 | K S Dhall  |	500000 |+	+	+	+7 rows in set (0.00 sec)MariaDB [loans]> select accn,custname,loanamount from loans where custname not like '%p%';+	+	+	+| accn | custname | loanamount |+	+	+	+|	7 | K S Dhall |	500000 |+	+	+	+1 row in set (0.00 sec)MariaDB [loans]> select accn,custname,loanamount from loans where custname like '%a_';+	+	+	+| accn | custname	| loanamount |+	+	+	+|	4 | M P Yadhav |	800000 |+	+	+	+1 row in set (0.00 sec)MariaDB [loans]> select * from loans order by loanamount asc;+	+	+	+	+	+	+	+| accn | custname	| loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+|	5 | S P Sinha  |	200000 |	36 | 13.00 | 2010-01-03 |	4500 ||	1 | R K Gupta  |	300000 |	36 | 12.00 | 2009-07-19 |	1200 ||	3 | K P Jain	|	300000 |	36 | NULL | 2007-03-08 |	1600 ||	2 | S P Sharma |	500000 |	48 | 10.00 | 2008-03-22 |	1800 ||	7 | K S Dhall  |	500000 |	48 | NULL | 2008-03-05 |	3800 ||	6 | P Sharma	|	700000 |	60 | 13.00 | 2008-06-05 |	3500 ||	4 | M P Yadhav |	800000 |	60 | 10.00 | 2008-12-06 |	2250 |+	+	+	+	+	+	+	+
+
+7 rows in set (0.00 sec)MariaDB [loans]> select * from loans order by startdate desc;+	+	+	+	+	+	+	+| accn | custname	| loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+|	5 | S P Sinha  |	200000 |	36 | 13.00 | 2010-01-03 |	4500 ||	1 | R K Gupta  |	300000 |	36 | 12.00 | 2009-07-19 |	1200 ||	4 | M P Yadhav |	800000 |	60 | 10.00 | 2008-12-06 |	2250 ||	6 | P Sharma	|	700000 |	60 | 13.00 | 2008-06-05 |	3500 ||	2 | S P Sharma |	500000 |	48 | 10.00 | 2008-03-22 |	1800 ||	7 | K S Dhall  |	500000 |	48 | NULL | 2008-03-05 |	3800 ||	3 | K P Jain	|	300000 |	36 | NULL | 2007-03-08 |	1600 |+	+	+	+	+	+	+	+7 rows in set (0.00 sec)MariaDB [loans]> update loans set rate=11.50 where rate is null;MariaDB [loans]> select * from loans
+;+	+	+	+	+	+	+	+| accn | custname	| loanamount | instalments | rate | startdate | interest |+	+	+	+	+	+	+	+|	1 | R K Gupta  |	300000 |	36 | 12.00 | 2009-07-19 |	1200 ||	2 | S P Sharma |	500000 |	48 | 10.00 | 2008-03-22 |	1800 ||	3 | K P Jain	|	300000 |	36 | 11.50 | 2007-03-08 |	1600 ||	4 | M P Yadhav |	800000 |	60 | 10.00 | 2008-12-06 |	2250 ||	5 | S P Sinha  |	200000 |	36 | 13.00 | 2010-01-03 |	4500 ||	6 | P Sharma	|	700000 |	60 | 13.00 | 2008-06-05 |	3500 ||	7 | K S Dhall  |	500000 |	48 | 11.50 | 2008-03-05 |	3800 |+	+	+	+	+	+	+	+7 rows in set (0.00 sec)MariaDB [loans]> update loans set rate=rate+0.5 where loanamount>400000; Query OK,MariaDB [loans]> update loans set interest=(loanamount*rate*instalments)/12*10;QueryMariaDB [loans]> delete from loans where custname='K.P Jain';)MariaDB [loans]> alter table loans add category char(1-> );Query OK, 0 rows affected (0.37 sec)MariaDB [loans]> select sum(loanamount) from loans where rate>10;+	+| sum(loanamount) |+	+|	3300000 |+	+1 row in set (0.00 sec)MariaDB [loans]> select max(interest ) from loans;+	+| max(interest ) |
+
+
++	+|	472500000 |+	+1 row in set (0.00 sec)MariaDB [loans]> select count(custname)from loans where custname like '%Sharma';+	+| count(custname) |+	+|	2 |+	+MariaDB [loans]> select count(interest)from loans where interest is null;+	+| count(interest) |+	+|	0 |+	+MariaDB [loans]> select interest,count(accn) from loans group by interest;+	+	+| interest | count(accn) |+	+	+| 78000000 |	1 || 103500000 |	1 || 108000000 |	1 || 210000000 |	1 || 240000000 |	1 || 420000000 |	1 || 472500000 |	1 |+	+	+MariaDB [loans]> select interest,count(accn) from loans where instalments>10 group by interest;+	+	+| interest | count(accn) |+	+	+| 78000000 |	1 || 103500000 |	1 || 108000000 |	1 || 210000000 |	1 || 240000000 |	1 || 420000000 |	1 || 472500000 |	1 |+	+	+
+MariaDB [loans]> select interest,count(accn) from
+
+loans where instalments>5 group by interest;+	+	+| interest | count(accn) |+	+	+| 78000000 |	1 || 103500000 |	1 || 108000000 |	1 || 210000000 |	1 || 240000000 |	1 || 420000000 |	1 || 472500000 |	1 |+	+	+
+
+PROGRAM 7	DATE: 12-04-22
+
+AIM: Optimizing databases (Join)
+
+
+Perform all types of SQL JOIN in the tables:
+1. INNER JOIN
+2. LEFT JOIN
+3. RIGHT JOIN
+
+OUTPUT
+
+MariaDB [(none)]> create database db8;MariaDB [(none)]> use db8;Database changedMariaDB [db8]> create table employee(eid int primary key,ename varchar(15),city
+varchar(10),salary int,age int);MariaDB [db8]> insert into employee values(1,'angelina','chicago','200000','30');MariaDB [db8]> insert into employee values(2,'robert','austin','300000','26');MariaDB [db8]> insert into employee values(3,'christian','denver','100000','42');MariaDB [db8]> insert into employee values(4,'kristen','washington','500000','29');MariaDB [db8]> insert into employee values(5,'russell','losangels','200000','36');MariaDB [db8]> insert into employee values(6,'marry','canada','600000','48');MariaDB [db8]> create table projects(pno int,eid int references employee,dept
+varchar(20));MariaDB [db8]> select * from employee;
++	+	+	+	+	+| eid | ename	| city	| salary | age |+	+	+	+	+	+|	1 | angelina | chicago	| 200000 |	30 ||	2 | robert	| austin	| 300000 |	26 ||	3 | christian | denver	| 100000 |	42 ||	4 | kristen	| washington | 500000 |	29 ||	5 | russell	| losangels | 200000 |	36 ||	6 | marry	| canada	| 600000 |	48 |+	+	+	+	+	+MariaDB [db8]> insert into projects values(101,1,'testing');MariaDB [db8]> insert into projects values(102,2,'development');MariaDB [db8]> insert into projects values(103,3,'designing');MariaDB [db8]> insert into projects values(104,4,'development');MariaDB [db8]> select * from projects;+	+	+	+| pno | eid | dept	|+	+	+	+| 101 |	1 | testing	|| 102 |	2 | development || 103 |	3 | designing	|| 104 |	4 | development |+	+	+	+MariaDB [db8]> select employee.ename,projects.dept from employee inner join projMariaDB [db8]> select employee.ename,projects.dept from employee inner join projects on employee.eid=projects.eid;+	+	+| ename	| dept	|+	+	+| angelina | testing	|| robert	| development || christian | designing	|| kristen	| development |+	+	+MariaDB [db8]> select employee.ename,employee.city,employee.salary,employee.age,projects.pno,projects.d ept from employee left join projects on employee.eid=projects.eid;+	+	+	+	+	+	+| ename	| city	| salary | age | pno | dept	|+	+	+	+	+	+	+| angelina | chicago	| 200000 |	30 | 101 | testing	|| robert	| austin	| 300000 |	26 | 102 | development || christian | denver	| 100000 |	42 | 103 | designing	|| kristen	| washington | 500000 |	29 | 104 | development |
+
+
+| russell	| losangels | 200000 |	36 | NULL | NULL	|| marry	| canada	| 600000 |	48 | NULL | NULL	|+	+	+	+	+	+	+MariaDB [db8]> select employee.ename,employee.city,employee.salary,employee.age,projects.pno,projects.d ept from employee right join projects on employee.eid=projects.eid;+	+	+	+	+	+	+| ename	| city	| salary | age | pno | dept	|+	+	+	+	+	+	+| angelina | chicago	| 200000 |	30 | 101 | testing	|| robert	| austin	| 300000 |	26 | 102 | development || christian | denver	| 100000 |	42 | 103 | designing	|| kristen	| washington | 500000 |	29 | 104 | development |+	+	+	+	+	+	+
+
+PROGRAM 8	DATE: 24-04-22
+
+AIM: PL/SQL program- Stored Procedures to find minimum number between two numbers
+set serveroutput on declare
+a number; b number; c number;
+ PROCEDURE findMin(x in number,y in number,z out number) is begin
+if x<y then z:=x;
+else z:=y; end if; end;
+
+begin a:=&a;
+b:=&b; findMin(a,b,c);
+dbms_output.put_line('MINIMUM'||c); end;
+/
+
+OUTPUT
+SQL> @prgrm6 Enter value for a: 45 old 15: a:=&a;
+new 15: a:=45; Enter value for b: 23 old 16: b:=&b;
+new 16: b:=23;
+MINIMUM23
+
+PL/SQL procedure successfully completed.
+
+PROGRAM 9	DATE: 24-04-22
+
+AIM: PL/SQL program- Stored Procedures to find square of a number.
+
+set serveroutput on declare
+n number; m number;
+PROCEDURE findsquare ( x in number, y out number) is begin
+y:=x*x; end; begin n:=&n;
+findsquare(n,m); dbms_output.put_line('square of '||n||':'||m); end;
+/
+
+OUTPUT
+
+SQL> @prgrm7 Enter value for n: 6 old 9: n:=&n;
+new 9: n:=6;
+
+square of 6:36
+
+
+PL/SQL procedure successfully completed.
+
+PROGRAM 10	DATE: 24-04-22
+
+AIM: PL/SQL program- Stored Procedures to swap 2 numbers
+
+set serveroutput on declare
+ a number; b number;
+temp number;
+PROCEDURE swap(x in out number,Y in out number)is begin
+temp:=x; x:=y; y:=temp; end; begin
+a:=&a;
+b:=&b;
+dbms_output.put_line('before swap:'); dbms_output.put_line('a:'||a||'b:'||b); swap(a,b); dbms_output.put_line('after swap:'); dbms_output.put_line('a:'||a||'b:'||b); end;
+/
+OUTPUT
+SQL> @prgrm8
+Enter value for num: 20 old 11:	num1:=&num;
+new 11:		num1:=20; Enter value for num: 60 old 12:	num2:=&num;
+new 12:	num2:=60; before
+num1 = 20 num2 = 60 after
+num1 = 60 num2 = 20
+PL/SQL procedure successfully completed.
+
+PROGRAM 11	DATE: 24-04-22
+
+AIM: PL/SQL program- Function to find maximum between 2 numbers.
+
+set serveroutput on declare
+a number; b number; c number;
+FUNCTION findMax(x in number,y in number)
+RETURN number is
+z number; begin
+if x>y then z:=x;
+else z:=y; end if; return z; end; begin a:=&a;
+b:=&b; c:=findMax(a,b);
+dbms_output.put_line('Maximum'||c); end;
+/
+
+OUTPUT
+SQL> @prgrm9 Enter value for a: 87 old 20: a:=&a;
+new 20: a:=87; Enter value for b: 67 old 21: b:=&b;
+new 21: b:=67;
+Maximum87
+PL/SQL procedure successfully completed.
+
+PROGRAM 12	DATE: 24-04-22
+
+AIM: PL/SQL program- Function to check whether the number is prime or not.
+
+set serveroutput on declare
+n number; i number;
+flag number;
+
+begin i:=2;
+flag:=1; n:=&n;
+
+for i in 2..n/2 loop
+if mod(n,i)=0
+
+then flag:=0;
+
+exit; end if;
+end loop; if flag=1 then
+dbms_output.put_line('prime');
+
+else
+dbms_output.put_line('not prime'); end if;
+
+end;
+/
+
+SQL> @prgrm10 Enter value for n: 2 old 9: n:=&n;
+new 9: n:=2; prime
+PL/SQL procedure successfully completed.
+
+PROGRAM 13	DATE: 24-04-22
+
+AIM: PL/SQL program-Trigger to handle update to the table.
+
+CREATE OR REPLACE TRIGGER display_salary_changes
+
+FOR EACH ROWWHEN (NEW.ID > 0)DECLAREsal_diff number;BEGINsal_diff := :NEW.salary - :OLD.salary;dbms_output.put_line('Old salary: ' || :OLD.salary);dbms_output.put_line('New salary: ' || :NEW.salary);dbms_output.put_line('Salary difference: ' || sal_diff);END;/set serveroutput ondeclaretotal_rows number(2);beginupdate customerSET salary = salary + 5000;if sql%notfound thendbms_output.put_line('no customers updated');elsif sql%found thentotal_rows:=sql%rowcount;dbms_output.put_line(total_rows||'customer updated');end if;end;
+
+OUTPUTSQL> @tiTrigger created.SQL> @t1Old salary: 15000New salary: 20000Salary difference: 5000Old salary: 13000New salary: 18000Salary difference: 5000
+Old salary: 17000New salary: 22000Salary difference: 5000Old salary: 17000New salary: 22000Salary difference: 5000Old salary: 18000New salary: 23000Salary difference: 50005customer updatedPL/SQL procedure successfully completed.
+
+PROGRAM 14	DATE: 24-04-22
+
+AIM: PL/SQL program to implement explicit cursor.
+
+set serveroutput on declare
+empid emp.empid%type; name emp.name%type; sal emp.sal%type;
+cursor c_emp is
+
+select empid,name,sal from emp; begin
+open c_emp; loop
+fetch c_emp into empid,name,sal; exit when c_emp%notfound;
+dbms_output.put_line(empid|| ' '|| name|| ' '|| sal); end loop;
+close c_emp;
+
+end;
+/
+OUTPUT
+SQL> @emp 1 miran 40000
+2 monica 30000
+
+3 Avinash 30000
+
+4 johan 35000
+
+5 jeffry 45000
+
+PL/SQL procedure successfully completed.
+
+PROGRAM 15	DATE: 24-04-22
+
+AIM: PL/SQL program to implement implicit cursor
+
+set serveroutput on declare
+total_rows number(2); begin
+update emp
+
+set sal = sal + 500;
+
+if sql%notfound then dbms_output.put_line('no employee selected'); elsif sql%found then
+total_rows := sql%rowcount;
+
+dbms_output.put_line( total_rows || ' employees selected'); end if;
+end;
+
+/
+
+OUTPUT
+
+SQL> select * from emp;
+
+EMPID NAME	SAL
+
+
+
+1 miran405002 monica305003 Avinash305004 johan355005 jeffry45500
+
+PROGRAM 19	DATE: 12-06-22
+
+AIM: Query Processing- Usage of aggregate functions, regular expressions
+1.Find the average salary of each department. 2.Find the minimum salary of each department 3.Find the maximum salary of each dept.
+4. Find number of employees of each dept
+5. Sort the collection Empdetails in descending order of name
+6. Create a text index for 'name' and search for names Mohan and Bhuvan
+
+
+OUTPUT
+
+db.Empdetails.find();
+{ "_id" : ObjectId("629e24a991a60a4785f75d62"), "name" : "Bhuvan", "age" : 30, "email" : "bhuvan@gps.com", "salary" : 5000 }
+{ "_id" : ObjectId("629e24cc91a60a4785f75d63"), "name" : "Mohan", "age" : 32, "email" : "Mohan@gps.com", "salary" : 4000 }
+{ "_id" : ObjectId("629e24e791a60a4785f75d64"), "name" : "Raju", "age" : 29, "email" : "Raju@gps.com", "salary" : 6000 }
+{ "_id" : ObjectId("629e24ff91a60a4785f75d65"), "name" : "Manu", "age" : 29, "email" : "Manu@gps.com", "salary" : 5500 }
+{ "_id" : ObjectId("629e251491a60a4785f75d66"), "name" : "Ram", "age" : 31, "email" : "Ram@gps.com", "salary" : 4500 }
+
+> db.Empdetails.update({name:"Bhuvan"},{$set:{dept:"Developer"}}) WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Empdetails.update({name:"Mohan"},{$set:{dept:"Designer"}}) WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Empdetails.update({name:"Manu"},{$set:{dept:"Designer"}}) WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Empdetails.update({name:"Raju"},{$set:{dept:"Tester"}})
+
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Empdetails.update({name:"Ram"},{$set:{dept:"Tester"}}) WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+>> db.Empdetails.find()
+{ "_id" : ObjectId("629e24a991a60a4785f75d62"), "name" : "Bhuvan", "age" : 30, "email" : "bhuvan@gps.com", "salary" : 5000, "dept" : "Developer" }
+{ "_id" : ObjectId("629e24cc91a60a4785f75d63"), "name" : "Mohan", "age" : 32, "email" : "Mohan@gps.com", "salary" : 4000, "dept" : "Designer" }
+{ "_id" : ObjectId("629e24e791a60a4785f75d64"), "name" : "Raju", "age" : 29, "email" : "Raju@gps.com", "salary" : 6000, "dept" : "Tester" }
+{ "_id" : ObjectId("629e24ff91a60a4785f75d65"), "name" : "Manu", "age" : 29, "email" : "Manu@gps.com", "salary" : 5500, "dept" : "Designer" }
+{ "_id" : ObjectId("629e251491a60a4785f75d66"), "name" : "Ram", "age" : 31, "email" : "Ram@gps.com", "salary" : 4500, "dept" : "Tester" }
+
+
+1. db.Empdetails.aggregate([{$group:{_id:"$dept","Avg_Salary":{$avg:"$salary"}}}])
+{ "_id" : "Designer", "Avg_Salary" : 4750 }
+{ "_id" : "Developer", "Avg_Salary" : 5000 }
+{ "_id" : "Tester", "Avg_Salary" : 5250 }
+
+2. db.Empdetails.aggregate([{$group:{_id:"$dept","Min_Salary":{$min:"$salary"}}}])
+{ "_id" : "Designer", "Min_Salary" : 4000 }
+{ "_id" : "Tester", "Min_Salary" : 4500 }
+{ "_id" : "Developer", "Min_Salary" : 5000 }
+
+3. db.Empdetails.aggregate([{$group:{_id:"$dept","Max_Salary":{$max:"$salary"}}}])
+{ "_id" : "Designer", "Max_Salary" : 5500 }
+{ "_id" : "Developer", "Max_Salary" : 5000 }
+{ "_id" : "Tester", "Max_Salary" : 6000 }
+
+4. db.Empdetails.aggregate([{$group:{_id:"$dept","No of Employees":{$sum:1}}}])
+{ "_id" : "Designer", "No of Employees" : 2 }
+
+{ "_id" : "Developer", "No of Employees" : 1 }
+{ "_id" : "Tester", "No of Employees" : 2 }
+
+5. db.Empdetails.find().sort({name:-1})
+{ "_id" : ObjectId("629e251491a60a4785f75d66"), "name" : "Ram", "age" : 31, "email" : "Ram@gps.com", "salary" : 4500, "dept" : "Tester" }
+{ "_id" : ObjectId("629e24e791a60a4785f75d64"), "name" : "Raju", "age" : 29, "email" : "Raju@gps.com", "salary" : 6000, "dept" : "Tester" }
+{ "_id" : ObjectId("629e24cc91a60a4785f75d63"), "name" : "Mohan", "age" : 32, "email" : "Mohan@gps.com", "salary" : 4000, "dept" : "Designer" }
+{ "_id" : ObjectId("629e24ff91a60a4785f75d65"), "name" : "Manu", "age" : 29, "email" : "Manu@gps.com", "salary" : 5500, "dept" : "Designer" }
+{ "_id" : ObjectId("629e24a991a60a4785f75d62"), "name" : "Bhuvan", "age" : 30, "email" : "bhuvan@gps.com", "salary" : 5000, "dept" : "Developer" }
+
+6. db.Empdetails.createIndex({name:"text"})
+{
+
+"numIndexesBefore" : 1,
+"numIndexesAfter" : 2, "createdCollectionAutomatically" : false, "ok" : 1
+}
+
+> db.Empdetails.find()
+{ "_id" : ObjectId("629e24a991a60a4785f75d62"), "name" : "Bhuvan", "age" : 30, "email" : "bhuvan@gps.com", "salary" : 5000, "dept" : "Developer" }
+{ "_id" : ObjectId("629e24cc91a60a4785f75d63"), "name" : "Mohan", "age" : 32, "email" : "Mohan@gps.com", "salary" : 4000, "dept" : "Designer" }
+{ "_id" : ObjectId("629e24e791a60a4785f75d64"), "name" : "Raju", "age" : 29, "email" : "Raju@gps.com", "salary" : 6000, "dept" : "Tester" }
+{ "_id" : ObjectId("629e24ff91a60a4785f75d65"), "name" : "Manu", "age" : 29, "email" : "Manu@gps.com", "salary" : 5500, "dept" : "Designer" }
+{ "_id" : ObjectId("629e251491a60a4785f75d66"), "name" : "Ram", "age" : 31, "email" : "Ram@gps.com", "salary" : 4500, "dept" : "Tester" }
+
+db.Empdetails.find({$text:{$search:"Mohan Bhuvan"}})
+{ "_id" : ObjectId("629e24a991a60a4785f75d62"), "name" : "Bhuvan", "age" : 30, "email" : "bhuvan@gps.com", "salary" : 5000, "dept" : "Developer" }
+{ "_id" : ObjectId("629e24cc91a60a4785f75d63"), "name" : "Mohan", "age" : 32, "email" : "Mohan@gps.com", "salary" : 4000, "dept" : "Designer" }
+
+PROGRAM 20	DATE: 12-06-22
+
+AIM: Create a database Inventory and create an orders collection. Apply MapReduce operation for finding the total purchase of each customer.
+
+
+OUTPUT
+
+use inventory
+switched to db inventory
+> db.createCollection("order")
+{ "ok" : 1 }
+> db.order.insert({custid:200,name:"Maya",item:"rice",price:340}) WriteResult({ "nInserted" : 1 })
+> db.order.insert({custid:201,name:"Manu",item:"rice",price:340}) WriteResult({ "nInserted" : 1 })
+> db.order.insert({custid:202,name:"Meera",item:"Sugar",price:150}) WriteResult({ "nInserted" : 1 })
+> db.order.insert({custid:202,name:"Meera",item:"Wheat",price:250}) WriteResult({ "nInserted" : 1 })
+> db.order.insert({custid:200,name:"Maya",item:"Wheat",price:250}) WriteResult({ "nInserted" : 1 })
+db.order.find()
+{ "_id" : ObjectId("629eef7052aad2bf59954aaa"), "custid" : 200, "name" : "Maya", "item" : "rice", "price" : 340 }
+{ "_id" : ObjectId("629eef9c52aad2bf59954aab"), "custid" : 201, "name" : "Manu", "item" : "rice", "price" : 340 }
+{ "_id" : ObjectId("629eefd852aad2bf59954aad"), "custid" : 202, "name" : "Meera", "item" : "Sugar", "price" : 150 }
+{ "_id" : ObjectId("629ef02052aad2bf59954aae"), "custid" : 202, "name" : "Meera", "item" : "Wheat", "price" : 250 }
+{ "_id" : ObjectId("629ef05b52aad2bf59954aaf"), "custid" : 200, "name" : "Maya", "item" : "Wheat", "price" : 250 }
+
+{"_id" : ObjectId("629ef15f52aad2bf59954ab0"), "custid" : 203, "name" : "Navya", "item" : "Wheat", "price" : 250 }
+
+var mapFunction=function(){emit(this.custid,this.price);};
+> var reduceFunction=function(key,values){return Array.sum(values);};
+> db.order.mapReduce(mapFunction,reduceFunction,{'out':"map_example"})
+{ "result" : "map_example", "ok" : 1 }
+
+db.map_example.find();
+{ "_id" : 202, "value" : 400 }
+{ "_id" : 201, "value" : 340 }
+{ "_id" : 200, "value" : 590 }
+{ "_id" : 203, "value" : 250 }
+
+PROGRAM 21	DATE: 12-06-22
+
+AIM: Applying Map Reduce operation
+
+
+1. Apply MapReduce operation for finding the average of price ,whose custid greater than 201.
+
+OUTPUT
+
+
+
+>var mapFunction=function(){emit(this.custid,this.price);};
+> var reduceFunction=function(key,values){return Array.avg(values);};
+ db.order.mapReduce(mapFunction,reduceFunction,{query:{custid:{$gt:201}},out:"map_exampl e1"})
+{ "result" : "map_example1", "ok" : 1 }
+> db.map_example1.find()
+{ "_id" : 202, "value" : 200 }
+{ "_id" : 203, "value" : 250 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. DECLARE   
+2. VAR1 NUMBER;  
+3. VAR2 NUMBER;  
+4. BEGIN   
+5. VAR1:=100;  
+6. VAR2:=1;  
+7. LOOP  
+8. DBMS_OUTPUT.PUT_LINE (VAR1*VAR2);  
+9. IF (VAR2=10) THEN  
+10. EXIT;  
+11. END IF;  
+12. VAR2:=VAR2+1;  
+13. END LOOP;  
+14. END;  
+
+
+
+
+
+
+1. DECLARE  
+2. i NUMBER := 1;  
+3. BEGIN  
+4. LOOP  
+5. EXIT WHEN i>10;  
+6. DBMS_OUTPUT.PUT_LINE(i);  
+7. i := i+1;  
+8. END LOOP;  
+9. END;  
+
+
+
+
+
+1. LOOP  
+2.   Sequence of statements;  
+3. END LOOP; 
+
+
+1. LOOP   
+2.    statements;   
+3.    EXIT;   
+4.    {or EXIT WHEN condition;}  
+5. END LOOP;  
+
+
+1. DECLARE  
+2. i INTEGER := 1;  
+3. BEGIN  
+4. WHILE i <= 10 LOOP  
+5. DBMS_OUTPUT.PUT_LINE(i);  
+6. i := i+1;  
+7. END LOOP;  
+8. END;  
+
+
+
