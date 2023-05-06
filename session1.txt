@@ -1,0 +1,84 @@
+index.html
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="Heading">Sessions</div>
+        <div id="Main">
+            <form name="myform" method="post" action="newjsp.jsp">
+                <h1>Enter your details</h1>
+                <label>Username:</label>
+                <input type="text" name="user" id="user">
+                <br>
+                <label>Email:</label>
+                <input type="text" name="email" id="email">
+                <br>
+                <input type="submit" name="sub" id="sub" value="submit">
+            </form>
+            
+            
+        </div>
+    </body>
+</html>
+
+newjsp.jsp
+<%-- 
+    Document   : newjsp
+    Created on : 25 Apr, 2023, 10:38:50 AM
+    Author     : SCMS
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <%
+            //setting session
+            String x = request.getParameter("user");
+            String y = request.getParameter("email");
+            session.setAttribute("username",x);
+            session.setAttribute("email",y);
+        %>
+        <form name="myform2" method="post" action="welcome.jsp">
+            <input type="submit" name="sub2" id="sub2" value="Welcome Page">
+        </form>
+</body>
+</html>
+
+welcome.jsp
+
+<%-- 
+    Document   : welcome
+    Created on : 25 Apr, 2023, 10:58:47 AM
+    Author     : SCMS
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <%
+            out.print("<h1>Hello "+session.getAttribute("username")+"!</h1>");
+            out.print("<p>Your email is: "+session.getAttribute("email")+"</p>");
+            out.print("<p>Your username is: "+session.getAttribute("username")+"</p>");
+        %>
+    </body>
+</html>

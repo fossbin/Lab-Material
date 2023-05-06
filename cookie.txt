@@ -1,0 +1,80 @@
+index.html
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Demo on Cookies</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div><h1>Cookie Treat</h1></div>
+        <form name="myform" method="post" action="cookieset.jsp">
+            Enter Your Name:<input type="text" name="username" id="username"><br>
+            Enter Your Email:<input type="text" name="email" id="email"><br>
+            <input type="submit" name="sub" id="sub" value="Set Cookie">
+            <input type="button" name="subr" id="subr" value="Read Cookie" onclick="location.href='cookieread.jsp'">
+        </form>
+    </body>
+</html>
+
+cookieset.jsp
+
+
+<%-- 
+    Document   : cookieset
+    Created on : 25 Apr, 2023, 11:58:09 AM
+    Author     : SCMS
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Cookie Set Success</h1>
+        <%
+          String vname=request.getParameter("username");
+          String vemail=request.getParameter("email");
+          
+          Cookie cname=new Cookie("username",vname);
+          Cookie cemail=new Cookie("email",vemail);
+          
+          cname.setMaxAge(60*60*10);
+          cemail.setMaxAge(60*60*10);
+          
+          //Add both the cookies inn the response header
+          response.addCookie(cname);
+          response.addCookie(cemail);
+        %>
+    </body>
+</html>
+
+cookieread.jsp
+
+<%-- 
+    Document   : cookieread
+    Created on : 25 Apr, 2023, 12:02:59 PM
+    Author     : SCMS
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>We Never Forget You ${cookie['username'].getValue()}</h1>
+        <h6>With email ${cookie['email'].getValue()}</h6>
+    </body>
+</html>
