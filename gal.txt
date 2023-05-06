@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+	html { 
+  background: linear-gradient(to right, #267871, #69ab62) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.maintitle
+{
+padding-bottom: 30px;
+font-size:50px;
+
+}
+.style1 {
+	font-size: 36px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+}
+.style5 {color: #ffffff; 
+}
+.style6 {color: #FFFFFF;
+		font-weight: bold;
+		font-size:15px;
+		text-shadow:
+		0px 4px rgba(0,0,0,0.1);}
+.zoom {
+  
+  transition: transform .2s; 
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(1.5); 
+}
+.flipbox
+{
+background: #FFFFFF;
+border-radius: 8px;
+box-shadow: 
+    0px 2px 10px rgba(0,0,0,0.2), 
+    0px 10px 20px rgba(0,0,0,0.3), 
+    0px 30px 100px 1px rgba(0,0,0,0.4);
+}
+
+-->
+</style>
+</head>
+
+<body>
+<table width="100%" height="100%" border="0">
+  <tr>
+  
+    <td width="100%" class = "flipbox" ><div align="center" class="style8"><img src="img/cart.gif" width="50" height="45"><span class = "maintitle"> FlipGart </span></div>			
+	</td>
+   
+  </tr>
+  <tr>
+    <td height="344" colspan="2"  class="style5"><br><table width="585" height="355" border="0" align="center">
+      <tr>
+        <td width="195"><div align="center"><img src="img/download.jpeg" width="177" height="171" class = "zoom"/></div></td>
+        <td width="193"><div align="center"><img src='img/mbp-spacegray-select-202206.jpeg' width="177" height="171" class ="zoom"></div></td>
+        <td width="194"><div align="center"><img src="img/xWZMNYm.jpeg" width="177" height="171" class = "zoom"></div></td>
+      </tr>
+      <tr>
+        <td> <div align="center" class="style6">Sony WH-1000XM5 Wireless Headphones </div></td>
+        <td><div align="center" class="style6">Apple Macbook Pro 2020 </div></td>
+        <td><div align="center" class="style6">Sony Playstation 5 </div></td>
+      </tr>
+      <tr>
+        <td class="style6"><div align="center">20,000 Rs </div></td>
+        <td class="style6"><div align="center">1,50,999 Rs </div></td>
+        <td class="style6"><div align="center">49,500 Rs </div></td>
+      </tr>
+      <tr>
+        <td colspan="3">&nbsp;</td>
+        </tr>
+      <tr>
+        <td><div align="center"><img src="img/s22.jpg" width="177" height="171" class = "zoom"></div></td>
+        <td><img src="img/61IhQqu+M2L._SX679_.jpg" width="177" height="171" class = "zoom"></td>
+        <td><img src="img/3310.png" width="177" height="171" class = "zoom"></td>
+      </tr>
+      <tr>
+        <td class="style6"><div align="center">Samsung Galaxy s22 Ultra </div></td>
+        <td class="style6"><div align="center">Nothing Phone 1 </div></td>
+        <td class="style6"><div align="center">Nokia 3310- New Edition </div></td>
+      </tr>
+      <tr>
+        <td class="style6"><div align="center">1,20,999 Rs </div></td>
+        <td class="style6"><div align="center">32,599 Rs </div></td>
+        <td class="style6"><div align="center">3,499 Rs </div></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>
